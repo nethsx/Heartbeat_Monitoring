@@ -1,26 +1,56 @@
 # Heartbeat Monitoring System
 
 ## Project Overview
-This repository contains the end-semester project progress for a **Heartbeat Monitoring System**. The project is designed to analyze heart rate data to identify specific abnormalities, such as **Bradycardia** and **Tachycardia**.
+This project analyzes heart rate data to detect abnormal heart conditions such as Bradycardia and Tachycardia.
+
+The final goal of the project was to create additional datasets that help differentiate whether abnormal heartbeat patterns occur during:
+- Rest condition
+- Active/workout condition
+
+The system classifies physiological state using only heart rate signal characteristics.
 
 ---
 
-## Dataset Details
-This project utilizes a combination of custom-generated data and standard reference data to ensure accuracy:
-
-* **Bradycardia & Tachycardia Datasets:** These are custom datasets I created specifically to test the system's ability to detect slow and fast heart rates.
-* **Kaggle Dataset:** A standard heart rate dataset sourced from Kaggle used as a baseline for normal heart rhythm comparisons.
-
----
-
-## Current Features
-* Implementation of abnormality detection logic.
-* Organization of heart rate datasets for comparative analysis.
-* Integration of hardware simulation logic (MATLAB/Simscape).
+## Datasets Used
+1. Normal Rest Dataset (~78 BPM)
+2. Rest Bradycardia Dataset (~33 BPM)
+3. Rest Tachycardia Dataset (~170 BPM)
+4. Active Bradycardia Dataset (~50 BPM)
+5. Active Tachycardia Dataset (~155 BPM)
 
 ---
 
-## How to Use
-1.  **Clone this repository:** `git clone https://github.com/nethra-programmer/Heartbeat_Monitoring`
-2.  **Locate Data:** The datasets are located in the main directory.
-3.  **Run:** Open the main project file in your compiler/environment to see the analysis results.
+## Features Added to Active Datasets
+The active datasets were modified with realistic workout-related characteristics such as:
+- Baseline wander from breathing movement
+- Motion artefacts from body movement
+- Increased signal noise
+- Beat morphology changes during exercise
+
+These features help the model distinguish active conditions from resting conditions.
+
+---
+
+## Machine Learning Classification
+The project uses a Support Vector Machine (SVM) with RBF kernel to classify signals as:
+- Rest condition
+- Active/workout condition
+
+### Features extracted:
+- Mean BPM
+- BPM variability
+- Baseline wander power
+- High-frequency noise power
+
+---
+
+## Results
+The model successfully differentiated rest and active physiological states using signal characteristics and achieved approximately **80–100% classification accuracy** depending on signal overlap and added noise.
+
+---
+
+## Technologies Used
+- MATLAB
+- Signal Processing
+- Machine Learning (SVM)
+- JSON datasets
